@@ -1,30 +1,55 @@
-# SDSSDatathon2026
-SDSS Datahon 2026 Public Services Category
+This project evaluates the operational resilience of Toronto’s shelter system using daily 2024–2025 capacity data.
 
-Users must have the dataset personally due to sharing constraints.
-## Inspiration
+Our goal is to identify structural fragility, evaluate the impact of temporary capacity loss, and determine how targeted buffer strategies can stabilize the system.
 
-The vast majority of Toronto’s shelter operating at or near capacity, causing the entire system to be vulnerable to shocks and preventing people from accessing the housing they need. We wanted to determine which service sectors experience the most pressure and how to use existing resources to improve distribution of shelter demand.
+ What We Analyze
 
-## What It Does
+* Daily occupancy and capacity utilization
+* Operational strain (pressure relative to capacity)
+* Sector-level vulnerability (Women, Youth, Families, etc.)
+* Geographic clustering of strain
+* Time trends in unavailable beds
 
-We built a dashboard to highlight key areas of strain across the system. Additionally, we created a policy simulation model that illustrates the effect of various scenarios on the system, such as increases in demand, decreases in unavailable rooms, increase in shelters, and relocation strategies.
+Strain is defined as:
 
-## How We Built It
+> **Strain = 1 − (Occupied Capacity / Total Capacity)**
 
-We cleaned and analyzed the provided public services dataset, realizing several sources of strain on Toronto’s homeless shelter system through data visualization. After identifying possible solutions, we constructed simulations to test the impact of policy changes throughout the system
+Higher strain indicates lower available slack and increased operational risk.
 
-## Challenges We Ran Into
+ Simulations
 
-We found it difficult to determine which direction we wanted to take with our project due to some differing views on feasibility and impact. On the technical side, we attempted to geocode latitude and longitude using the open street map or Google API; however, we ran into some issues calling that API and ultimately decided to use Geocodio instead. For our simulations, it was hard figuring out the logic and what types of simulations we wanted to do. **We also had to assume a minimum of a 5% increase in demand due to the current data being right-censored, meaning we are not able to see when actual demand is greater than supply because our current observations are capped at demand being equivalent to supply.**
+We conduct three scenario-based simulations:
 
-## Accomplishments We’re Proud of
+**1. Demand Shock**
+Increase demand by 5% and 10% to assess overflow risk by sector.
 
-- Agreeing on a direction to take the project
-- Figuring out redistribution logic for simulations (adding a fourth simulation that would illustrate what would happen if we had to reallocate only existing resources)
-- Our dashboard looks pretty nice :))
-- First hackathon for two of the team members
+**2. Capacity Restoration**
+Reactivate unavailable beds to measure potential reduction in overflow.
 
-## What We Learned
+**3. Strategic Buffering**
+Add outsourced beds in addition to restored capacity to evaluate stabilization impact.
 
-Homelessness is a very nuanced, systematic issue that requires careful policy decisions, and navigating a balance between feasibility and impact with limited resources can greatly constrain our decision-making scope.
+ Key Insights
+
+* The system operates near saturation.
+* Women and Youth shelters are the most shock-sensitive.
+* Restoring unavailable beds meaningfully reduces strain.
+* Expanding family shelter capacity yields the largest overall reduction in overflow.
+* The system lacks sufficient buffer capacity to absorb modest demand increases.
+
+ Repository Contents
+
+* `SDSSDatathon2026.ipynb` – Main analysis and simulations
+* `postal_codes_geocoded.csv` – Geocoded reference data
+* `README.md` – Project documentation
+
+Scope
+
+This analysis focuses on short-term operational resilience using 2024–2025 daily shelter data. It does not model long-term housing policy, prevention strategies, or funding reform.
+
+ How to Run
+
+Open `SDSSDatathon2026.ipynb` and run all cells. Users must have the original dataset which we cannot provide due to the hackathon terms of service.
+
+Required libraries:
+`pandas`, `numpy`, `matplotlib`, `seaborn`, `geopandas`
